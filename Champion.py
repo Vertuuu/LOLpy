@@ -1,5 +1,6 @@
 import requests
 import os
+from time import sleep
 class Champion:
     """
     A class to represent a specific League of Legends champion's data.
@@ -40,6 +41,7 @@ class Champion:
             self.name = name.title().replace(" ", "")
             self.region = region
             self.champion_dir = f"images/champion_imgs/{self.name}_imgs"
+            os.system(f"mkdir images && cd images && mkdir champion_imgs")
             os.system(f"cd images/champion_imgs && mkdir {self.name}_imgs && cd ../..")
         def get_all_champion_images(self):
             """

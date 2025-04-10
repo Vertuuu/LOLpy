@@ -1,1 +1,3 @@
-/images/champion_imgs/*
+images
+venv/
+__pycache__/
