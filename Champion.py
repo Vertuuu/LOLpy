@@ -77,3 +77,14 @@ class Champion:
                         file.write(champion_splash.content)
                 except Exception as e:
                     print(f"Error saving splash art: {e}")
+
+
+        def get_champion_skins(self):
+            champion_skins = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion/{self.name}.json").json()
+            champion_skins = champion_skins["data"][self.name]["skins"]
+            return champion_skins
+            try:
+                with open(f'{self.champion_dir}/skins-{self.name}.json', 'w') as file:
+                    file.write(champion_skins)
+            except Exception as e:
+                print(f"Error saving skins: {e}")
