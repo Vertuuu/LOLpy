@@ -42,7 +42,9 @@ class Champion:
             self.region = region
             self.champion_dir = f"images/champion_imgs/{self.name}_imgs"
             os.system(f"mkdir images && cd images && mkdir champion_imgs")
+            sleep(0.5)
             os.system(f"cd images/champion_imgs && mkdir {self.name}_imgs  && cd {self.name}_imgs && mkdir skins && cd ../../..")
+            sleep(0.5)
         def get_all_champion_images(self):
             """
             Retrieves all images of the champion and saves them to a directory with the champion's name inside images/champion_imgs.
@@ -83,7 +85,7 @@ class Champion:
             champion_skins = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion/{self.name}.json").json()
             champion_skins = champion_skins["data"][self.name]["skins"]
             for skin in champion_skins:
-                skin_name = skin["name"]
+                skin_name = skin["name"].replace(" ", "_").replace("/", "_") 
                 skin_num = skin["num"]
                 try:
                     skin_img = requests.get(f"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{self.name}_{skin_num}.jpg")
