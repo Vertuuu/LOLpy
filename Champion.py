@@ -47,11 +47,11 @@ class Champion:
             """
             Retrieves all images of the champion and saves them to a directory with the champion's name inside images/champion_imgs.
             """
-            self.get_champion_icon()
-            self.get_champion_loading_image()
+            self.get_icon()
+            self.get_loading_screen_img()
             self.get_splash_art()
 
-        def get_champion_icon(self):
+        def get_icon(self):
             champion_icon = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/img/champion/{self.name}.png")
             if champion_icon.status_code == 200:
                 print("Icon found")
@@ -60,7 +60,7 @@ class Champion:
                         file.write(champion_icon.content)
                 except Exception as e:
                     print(f"Error saving icon: {e}")
-        def get_champion_loading_image(self):
+        def get_loading_screen_img(self):
             champion_loading = requests.get(f"https://ddragon.leagueoflegends.com/cdn/img/champion/loading/{self.name}_0.jpg")
             if champion_loading.status_code == 200:
                 print("Loading found")
