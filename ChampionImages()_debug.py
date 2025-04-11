@@ -6,7 +6,7 @@ from time import sleep
 
 line_header = "=" * 50
 line = "-" * 50
-champion_name = "Irelia" #change this to the champion you want to test(use the "key" from the API: https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json)
+champion_name = "Briar" #change this to the champion you want to test(use the "key" from the API: https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json)
 
 print(f"\n{line_header}\nChampionImages() class debug\n{line_header}\n")
 
@@ -72,4 +72,17 @@ try:
 except Exception as e:
     print(f"Error getting all champion images: {e}⛔\n{line}")
 
+#test if .get_champion_skins() method works
+try:
+    skin_names = champion.get_champion_skins()
+    sleep(0.5)  # Wait for the images to be saved
+    for i in range(len(skin_names)):
+        skin_name = skin_names[i].replace(" ", "_").replace("/", "_").replace("'", "_").replace(":", "_").replace("!", "_").replace(".", "_").replace(",", "_")
+        path = f"images/champion_imgs/{champion_name}_imgs/skins/{champion_name}-{skin_name}.jpg"
+        assert os.path.exists(path), f"Champion {skin_name} skin splash art not found"
+        assert (os.path.getsize(path)>0), f"Champion {skin_name} skin splash art is empty"
+        assert os.path.isfile(path), f"Champion {skin_name} skin splash art is not a file"
+    print(f"Champion Skins saved successfully✅\n{line}")
+except Exception as e:
+    print(f"Error getting champion skins: {e}⛔\n{line}")
 

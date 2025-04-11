@@ -62,7 +62,6 @@ class ChampionImages(Champion):
         champion_icon = self.champion_obj["icon"]
         champion_icon = requests.get(f"{champion_icon}")
         if champion_icon.status_code == 200:
-            print("Icon found")
             try:
                 with open(f'{self.champion_dir}/icon-{self.name}.jpg', 'wb') as file:
                     file.write(champion_icon.content)
@@ -72,37 +71,33 @@ class ChampionImages(Champion):
         champion_loading = self.champion_obj["skins"][0]["loadScreenPath"]
         champion_loading = requests.get(f"{champion_loading}")
         if champion_loading.status_code == 200:
-            print("Loading Screen image found")
-            try:
-                with open(f'{self.champion_dir}/loading-{self.name}.jpg', 'wb') as file:
-                    file.write(champion_loading.content)
-            except Exception as e:      
-                print(f"Error saving loading screen: {e}")
+            with open(f'{self.champion_dir}/loading-{self.name}.jpg', 'wb') as file:
+                file.write(champion_loading.content)
 
     def get_splash_art(self):
         champion_splash = self.champion_obj["skins"][0]["uncenteredSplashPath"]
         champion_splash = requests.get(f"{champion_splash}")
         if champion_splash.status_code == 200:
-            print("Splash found")
             try:
                 with open(f'{self.champion_dir}/splash-{self.name}.jpg', 'wb') as file:
                     file.write(champion_splash.content)
             except Exception as e:
                 print(f"Error saving splash art: {e}")
     def get_champion_skins(self):
-        champion_skins = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion/{self.name}.json").json()
-        champion_skins = champion_skins["data"][self.name]["skins"]
+        champion_skins = self.champion_obj["skins"]
+        skins_names = list([skin["name"] for skin in champion_skins])
         for skin in champion_skins:
-            skin_name = skin["name"].replace(" ", "_").replace("/", "_").replace("'", "_").replace(":", "_").replace("!", "_").replace(".", "_").replace(",", "_").replace("&", "_") 
-            skin_num = skin["num"]
             try:
-                skin_img = requests.get(f"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{self.name}_{skin_num}.jpg")
-                if skin_img.status_code == 200 and skin_name!= "default":
-                    print(f"Skin {skin_name} found")
+                skin_name = skin["name"].replace(" ", "_").replace("/", "_").replace("'", "_").replace(":", "_").replace("!", "_").replace(".", "_").replace(",", "_")
+                skin_splash = skin["uncenteredSplashPath"]
+                skin_splash = requests.get(f"{skin_splash}")
+                if skin_splash.status_code == 200 and skin != champion_skins[0]:
                     with open(f'{self.champion_dir}/skins/{self.name}-{skin_name}.jpg', 'wb') as file:
-                        file.write(skin_img.content)
+                        file.write(skin_splash.content)
             except Exception as e:
-                print(f"Error saving skin {skin_name}: {e}")
+                print(f"Error saving skin splash art: {e}")
+        return skins_names
+  
 class Champions:
     """
     A class to represent generic League of Legends champions data.
