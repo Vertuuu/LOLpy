@@ -10,20 +10,22 @@ class Champion:
         Initializes the Champion object with the champion's name and region.
         """
         #TODO: standardize champion's self.name transformations
-        if name == "Bel'Veth":
-            self.name = "Belveth"
-        elif name == "K'Sante":
-            self.name = "KSante"
-        elif name == "Dr. Mundo":
+        if name in ["Bel'Veth", "bel'veth", "Bel'veth", "Kai'Sa", "kai'sa", "Kai'sa", "Kha'Zix", "kha'zix", "Kha'zix", "Cho'Gath", "cho'gath", "Cho'gath", "Vel'Koz", "vel'koz", "Vel'koz"]:
+            start = name.split("'")[0].title()
+            end = name.split("'")[1].lower()
+            self.name = f"{start}{end}"
+        elif name in ["K'Sante", "k'sante", "K'sante", "Kog'Maw", "kog'maw", "Kog'maw", "Rek'Sai", "rek'sai", "Rek'sai"]:
+            start = name.split("'")[0].title()
+            end = name.split("'")[1].title()
+            self.name = f"{start}{end}"
+        elif name in ["Dr. Mundo", "Dr. mundo", "dr. mundo"]:
             self.name = "DrMundo"
-        elif name == "Jarvan IV":
+        elif name in ["Jarvan IV", "jarvan iv", "jarvan IV"]:
             self.name = "JarvanIV"
-        elif name == "Kai'Sa":
-            self.name = "Kaisa"
-        elif name == "Kog'Maw":
-            self.name = "KogMaw"
-        elif name == "Kha'Zix":
-            self.name = "Khazix"
+        elif name in ["Wukong", "wukong"]:
+            self.name = "MonkeyKing"
+        elif name in ["Nunu & Willump", "nunu & willump", "Nunu & willump", "nunu & Willump", "Renata Glasc", "renata glasc", "Renata glasc", "renata Glasc"]:
+            self.name = name.split(" ")[0].title()
         else:
             self.name = name.title().replace(" ", "")
         self.region = region
@@ -101,7 +103,7 @@ class ChampionImages(Champion):
         champion_skins = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion/{self.name}.json").json()
         champion_skins = champion_skins["data"][self.name]["skins"]
         for skin in champion_skins:
-            skin_name = skin["name"].replace(" ", "_").replace("/", "_") 
+            skin_name = skin["name"].replace(" ", "_").replace("/", "_").replace("'", "_").replace(":", "_").replace("!", "_").replace(".", "_").replace(",", "_").replace("&", "_") 
             skin_num = skin["num"]
             try:
                 skin_img = requests.get(f"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{self.name}_{skin_num}.jpg")
@@ -119,7 +121,6 @@ class Champions:
         """
         Initializes the Champion object with the champion's name and region.
         """
-        self.name = name.title().replace(" ", "")
         self.region = region
         self.champions_obj = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion.json").json()
 
