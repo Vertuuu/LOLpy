@@ -17,6 +17,7 @@ except Exception as e:
     print(f"Error creating ChampionImages() object: {e}⛔\n{line}")
 
 #test if .get_champion_icon() method works
+print(f"\nTesting get_champion_icon() method:")
 try:
     champion.get_icon()
     sleep(0.5)  # Wait for the image to be saved
@@ -29,6 +30,7 @@ except Exception as e:
     print(f"Error getting champion icon: {e}⛔\n{line}")
 
 #test if .get_loading_screen_img() method works
+print(f"\nTesting get_loading_screen_img() method:")
 try:
     champion.get_loading_screen_img()
     sleep(0.5)  # Wait for the image to be saved
@@ -41,6 +43,7 @@ except Exception as e:
     print(f"Error getting champion loading screen image: {e}⛔\n{line}")
 
 #test if .get_splash_art() method works
+print(f"\nTesting get_splash_art() method:")
 try:
     champion.get_splash_art()
     sleep(0.5)  # Wait for the image to be saved
@@ -53,6 +56,7 @@ except Exception as e:
     print(f"Error getting champion splash art: {e}⛔\n{line}")
 
 #test if .get_all_champion_images() method works
+print(f"\nTesting get_all_champion_images() method:")
 try:
     champion.get_all_champion_images()
     sleep(0.5)  # Wait for the images to be saved
@@ -73,6 +77,7 @@ except Exception as e:
     print(f"Error getting all champion images: {e}⛔\n{line}")
 
 #test if .get_champion_skins() method works
+print(f"\nTesting get_champion_skins() method:")
 try:
     skin_names = champion.get_champion_skins()
     sleep(0.5)  # Wait for the images to be saved

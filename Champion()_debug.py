@@ -9,12 +9,14 @@ champion_name = "KogMaw" #change this to the champion you want to test(use the "
 
 print(f"\n{line_header}\nChampion() class debug\n{line_header}\n")
 #test if the Champion() object can be created
+
 try:
     champion = Champion(champion_name, "en-US")
 except Exception as e:
     print(f"Error creating Champion() object: {e}⛔\n{line}")
 
 #test if .get_champion_key() method works 
+print(f"\nTesting get_champion_key() method:")
 try:
     key = champion.get_champion_key()
     print(f"Champion Key: {key}✅\n{line}")
@@ -22,6 +24,7 @@ except Exception as e:
     print(f"Error getting champion key: {e}⛔\n{line}")
 
 #test if .get_champion_title() method works
+print(f"\nTesting get_champion_title() method:")
 try:
     title = champion.get_champion_title()
     print(f"Champion Title: {title}✅\n{line}")
@@ -29,6 +32,7 @@ except Exception as e:
     print(f"Error getting champion title: {e}⛔\n{line}")
 
 #test if .get_champion_id() method works
+print(f"\nTesting get_champion_id() method:")
 try:
     id = champion.get_champion_id()
     assert type(id) == int, "Champion ID is not an integer"

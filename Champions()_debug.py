@@ -13,6 +13,7 @@ except Exception as e:
     print(f"Error creating Champions() object: {e}⛔\n{line}")
 
 #test if the .get_champions_names() method works
+print(f"\nTesting get_champions_names() method:")
 try:
     champions_names = champions.get_champions_names()
     assert type(champions_names) == list, "Champions names is not a list"
@@ -27,6 +28,7 @@ except Exception as e:
     print(f"Error getting champions names: {e}⛔\n{line}")
 
 #test if the .get_champions_ids() method works
+print(f"\nTesting get_champions_ids() method:")
 try:
     champions_ids = champions.get_champions_ids()
     assert type(champions_ids) == list, "Champions ids is not a list"
@@ -41,6 +43,7 @@ except Exception as e:
     print(f"Error getting champions IDs: {e}⛔\n{line}")
 
 #test if the .get_champions_keys() method works
+print(f"\nTesting get_champions_keys() method:")
 try:
     champions_keys = champions.get_champions_keys()
     assert type(champions_keys) == list, "Champions keys is not a list"
@@ -55,6 +58,7 @@ except Exception as e:
     print(f"Error getting champions keys: {e}⛔\n{line}")
 
 #test if the .get_champions_by_lane() method works
+print(f"\nTesting get_champions_by_lane() method:")
 lane = "BOTTOM" #change this to the lane you want to test (TOP, JUNGLE, MID, BOT, SUPPORT)
 try:
     champions_by_lane = champions.get_champions_by_lane(lane)
