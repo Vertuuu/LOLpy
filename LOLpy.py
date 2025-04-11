@@ -129,6 +129,22 @@ class Champions:
         """
         champions_keys = [champion["key"] for champion in self.champions_data]
         return champions_keys
+    def get_champions_by_lane(self, lane: str):
+        """
+        Returns a list of champions in given lane.
+
+        lanes: TOP, MIDDLE, BOTTOM, JUNGLE, SUPPORT
+
+        """
+        lane = lane.upper()
+        if lane not in ["TOP", "MIDDLE", "BOTTOM", "JUNGLE", "SUPPORT"]:
+            raise ValueError("Invalid lane. Choose from: TOP, MIDDLE, BOTTOM, JUNGLE, SUPPORT")
+        champions_by_lane = []
+        for champion in self.champions_data:
+            if lane in champion["positions"]:
+                champions_by_lane.append({champion["name"]: champion["positions"]})
+        return champions_by_lane
+
 
 
             

@@ -54,6 +54,22 @@ try:
 except Exception as e:
     print(f"Error getting champions keys: {e}⛔\n{line}")
 
+#test if the .get_champions_by_lane() method works
+lane = "BOTTOM" #change this to the lane you want to test (TOP, JUNGLE, MID, BOT, SUPPORT)
+try:
+    champions_by_lane = champions.get_champions_by_lane(lane)
+    assert type(champions_by_lane) == list, "Champions by lane is not a list"
+    assert len(champions_by_lane) > 0, "Champions by lane list is empty"
+    for i, champion in enumerate(champions_by_lane):
+        assert type(champion) == dict, "Champion is not a dictionary"
+        for key in champion.keys():
+            assert lane in champion[key], "Champion lane is not in the list"
+            assert len(champion) > 0, "Champion lanes are empty"
+        print(f"{champion}✅")
+    print(f"{line}")
+except Exception as e:
+    print(f"Error getting champions by lane: {e}⛔\n{line}")
+
 
 
 
