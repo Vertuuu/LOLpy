@@ -86,6 +86,7 @@ class ChampionImages(Champion):
     def get_champion_skins(self):
         champion_skins = self.champion_obj["skins"]
         skins_names = list([skin["name"] for skin in champion_skins])
+        skins_names = skins_names[1:]
         for skin in champion_skins:
             try:
                 skin_name = skin["name"].replace(" ", "_").replace("/", "_").replace("'", "_").replace(":", "_").replace("!", "_").replace(".", "_").replace(",", "_")
