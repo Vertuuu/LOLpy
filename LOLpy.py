@@ -5,46 +5,34 @@ class Champion:
     """
     A class to represent a specific League of Legends champion's data.
     """
-    def __init__(self, name: str, region="en_US"):
+    def __init__(self, name: str, region="en-US"):
         """
         Initializes the Champion object with the champion's name and region.
         """
-        
-        if name in ["Bel'Veth", "bel'veth", "Bel'veth", "Kai'Sa", "kai'sa", "Kai'sa", "Kha'Zix", "kha'zix", "Kha'zix", "Cho'Gath", "cho'gath", "Cho'gath", "Vel'Koz", "vel'koz", "Vel'koz"]:
-            start = name.split("'")[0].title()
-            end = name.split("'")[1].lower()
-            self.name = f"{start}{end}"
-        elif name in ["K'Sante", "k'sante", "K'sante", "Kog'Maw", "kog'maw", "Kog'maw", "Rek'Sai", "rek'sai", "Rek'sai"]:
-            start = name.split("'")[0].title()
-            end = name.split("'")[1].title()
-            self.name = f"{start}{end}"
-        elif name in ["Dr. Mundo", "Dr. mundo", "dr. mundo"]:
-            self.name = "DrMundo"
-        elif name in ["Jarvan IV", "jarvan iv", "jarvan IV"]:
-            self.name = "JarvanIV"
-        elif name in ["Wukong", "wukong"]:
-            self.name = "MonkeyKing"
-        elif name in ["Nunu & Willump", "nunu & willump", "Nunu & willump", "nunu & Willump", "Renata Glasc", "renata glasc", "Renata glasc", "renata Glasc"]:
-            self.name = name.split(" ")[0].title()
-        else:
-            self.name = name.title().replace(" ", "")
+        self.name = name
         self.region = region
-        self.champion_obj = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion/{self.name}.json").json()
+        self.champion_obj = requests.get(f"https://cdn.merakianalytics.com/riot/lol/resources/latest/{self.region}/champions/{self.name}.json").json()
 
     def get_champion_key(self):
         """
         Returns the champion key.
         """
         
-        champion_key = self.champion_obj["data"][self.name]["key"]
+        champion_key = self.champion_obj["key"]
         return champion_key
     
     def get_champion_title(self):
         """
         Returns the champion title.
         """
-        champion_title = self.champion_obj["data"][self.name]["title"]
+        champion_title = self.champion_obj["title"]
         return champion_title
+    def get_champion_id(self):
+        """
+        Returns the champion ID.
+        """
+        champion_id = self.champion_obj["id"]
+        return champion_id
     
         # def get_champion_basic_info(self):
             
@@ -52,7 +40,7 @@ class Champion:
         #     champion_obj = champion_obj["data"][self.name]
         #     return champion_obj
 class ChampionImages(Champion):
-    def __init__(self, name: str, region="en_US"):
+    def __init__(self, name: str, region="en-US"):
         """
         Initializes the ChampionImages object with the champion's name and region.
         """
@@ -71,7 +59,8 @@ class ChampionImages(Champion):
         self.get_splash_art()
 
     def get_icon(self):
-        champion_icon = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/img/champion/{self.name}.png")
+        champion_icon = self.champion_obj["icon"]
+        champion_icon = requests.get(f"{champion_icon}")
         if champion_icon.status_code == 200:
             print("Icon found")
             try:
@@ -80,9 +69,10 @@ class ChampionImages(Champion):
             except Exception as e:
                 print(f"Error saving icon: {e}")
     def get_loading_screen_img(self):
-        champion_loading = requests.get(f"https://ddragon.leagueoflegends.com/cdn/img/champion/loading/{self.name}_0.jpg")
+        champion_loading = self.champion_obj["skins"][0]["loadScreenPath"]
+        champion_loading = requests.get(f"{champion_loading}")
         if champion_loading.status_code == 200:
-            print("Loading found")
+            print("Loading Screen image found")
             try:
                 with open(f'{self.champion_dir}/loading-{self.name}.jpg', 'wb') as file:
                     file.write(champion_loading.content)
@@ -90,7 +80,8 @@ class ChampionImages(Champion):
                 print(f"Error saving loading screen: {e}")
 
     def get_splash_art(self):
-        champion_splash = requests.get(f"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{self.name}_0.jpg")
+        champion_splash = self.champion_obj["skins"][0]["uncenteredSplashPath"]
+        champion_splash = requests.get(f"{champion_splash}")
         if champion_splash.status_code == 200:
             print("Splash found")
             try:
@@ -116,20 +107,32 @@ class Champions:
     """
     A class to represent generic League of Legends champions data.
     """
-    def __init__(self, name: str, region="en_US"):
+    def __init__(self, region="en-US"):
         """
         Initializes the Champion object with the champion's name and region.
         """
         self.region = region
-        self.champions_obj = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion.json").json()
+        self.champions_data = requests.get(f"https://cdn.merakianalytics.com/riot/lol/resources/latest/{self.region}/champions.json").json()
+        self.champions_data = list(self.champions_data.values())
 
-    def get_champion_list(self):
+    def get_champions_names(self):
         """
-        Returns a list of all champions.
+        Returns a list of all champions names.
         """
-        champions_list = self.champions_obj["data"]
-        champions_list = list(champions_list.values())
-        return champions_list
+        champions_names = [champion["name"] for champion in self.champions_data]
+        return champions_names
+    def get_champions_ids(self):
+        """
+        Returns a list of all champions IDs.
+        """
+        champions_ids = [champion["id"] for champion in self.champions_data]
+        return champions_ids
+    def get_champions_keys(self):
+        """
+        Returns a list of all champions keys.
+        """
+        champions_keys = [champion["key"] for champion in self.champions_data]
+        return champions_keys
 
 
             
