@@ -9,7 +9,7 @@ class Champion:
         """
         Initializes the Champion object with the champion's name and region.
         """
-        #TODO: standardize champion's self.name transformations
+        
         if name in ["Bel'Veth", "bel'veth", "Bel'veth", "Kai'Sa", "kai'sa", "Kai'sa", "Kha'Zix", "kha'zix", "Kha'zix", "Cho'Gath", "cho'gath", "Cho'gath", "Vel'Koz", "vel'koz", "Vel'koz"]:
             start = name.split("'")[0].title()
             end = name.split("'")[1].lower()
@@ -51,7 +51,6 @@ class Champion:
         #     champion_obj = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion/{self.name}.json").json()
         #     champion_obj = champion_obj["data"][self.name]
         #     return champion_obj
-    
 class ChampionImages(Champion):
     def __init__(self, name: str, region="en_US"):
         """

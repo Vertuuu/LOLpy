@@ -1,4 +1,4 @@
-from Champion import Champion, Champions, ChampionImages
+from LOLpy import Champion, Champions, ChampionImages
 if __name__ == "__main__":
     # Create a Champion object
     all_champions = Champions("en_US").get_champion_list()
