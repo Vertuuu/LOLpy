@@ -1,6 +1,9 @@
 #NOTE: Unit testing like this surely isn't the best way to test a class, but it works for now. As the project grows, we will need to implement a more robust testing framework.
-
-from LOLpy import Champions
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from configs import (DEBUG_LANE)
+from LOLpy.LOLpy import Champions
 
 line_header = "=" * 50
 line = "-" * 50
@@ -59,15 +62,14 @@ except Exception as e:
 
 #test if the .get_champions_by_lane() method works
 print(f"\nTesting get_champions_by_lane() method:")
-lane = "BOTTOM" #change this to the lane you want to test (TOP, JUNGLE, MID, BOT, SUPPORT)
 try:
-    champions_by_lane = champions.get_champions_by_lane(lane)
+    champions_by_lane = champions.get_champions_by_lane(DEBUG_LANE)
     assert type(champions_by_lane) == list, "Champions by lane is not a list"
     assert len(champions_by_lane) > 0, "Champions by lane list is empty"
     for i, champion in enumerate(champions_by_lane):
         assert type(champion) == dict, "Champion is not a dictionary"
         for key in champion.keys():
-            assert lane in champion[key], "Champion lane is not in the list"
+            assert DEBUG_LANE in champion[key], "Champion lane is not in the list"
             assert len(champion) > 0, "Champion lanes are empty"
         print(f"{champion}✅")
     print(f"{line}")

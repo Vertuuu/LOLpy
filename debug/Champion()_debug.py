@@ -1,17 +1,18 @@
 #NOTE: Unit testing like this surely isn't the best way to test a class, but it works for now. As the project grows, we will need to implement a more robust testing framework.
-
-from LOLpy import Champion
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from configs import (DEBUG_CHAMPION_NAME)
+from LOLpy.LOLpy import Champion
 
 line_header = "=" * 50
 line = "-" * 50
-champion_name = "KogMaw" #change this to the champion you want to test(use the "key" from the API: https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json)
-
 
 print(f"\n{line_header}\nChampion() class debug\n{line_header}\n")
 #test if the Champion() object can be created
 
 try:
-    champion = Champion(champion_name, "en-US")
+    champion = Champion(DEBUG_CHAMPION_NAME, "en-US")
 except Exception as e:
     print(f"Error creating Champion() object: {e}⛔\n{line}")
 
