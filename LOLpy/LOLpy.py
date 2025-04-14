@@ -33,12 +33,14 @@ class Champion:
         """
         champion_id = self.champion_obj["id"]
         return champion_id
-    
-        # def get_champion_basic_info(self):
+    def get_champion_lanes(self):
+        """
+        Returns champion's lanes
+        """
+        champion_lanes = list(self.champion_obj["positions"])
+        return  champion_lanes
             
-        #     champion_obj = requests.get(f"https://ddragon.leagueoflegends.com/cdn/15.7.1/data/{self.region}/champion/{self.name}.json").json()
-        #     champion_obj = champion_obj["data"][self.name]
-        #     return champion_obj
+
 class ChampionImages(Champion):
     def __init__(self, name: str, region="en-US"):
         """

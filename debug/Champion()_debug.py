@@ -42,3 +42,17 @@ try:
 except Exception as e:
     print(f"Error getting champion ID: {e}⛔\n{line}")
 
+#test if .get_champion_lane() method works
+print(f"\nTesting get_champion_lane() method:")
+try:
+    lanes = champion.get_champion_lanes()
+    assert type(lanes) == list, "Champion lanes is not a list"
+    assert len(lanes) > 0, "Champion lanes list is empty"
+    for lane in lanes:
+        assert type(lane) == str, "Champion lane is not a string"
+        assert len(lane) > 0, "Champion lane is empty"
+        assert lane in ["TOP", "MIDDLE", "BOTTOM", "JUNGLE", "SUPPORT"], "Champion lane is not in the list"
+    print(f"Champion Lanes: {lanes}✅\n{line}")
+except Exception as e:
+    print(f"Error getting champion lane: {e}⛔\n{line}")
+
