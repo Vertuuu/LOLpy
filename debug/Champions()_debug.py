@@ -12,6 +12,7 @@ print(f"\n{line_header}\nChampions() class debug\n{line_header}\n")
 #test if the Champions() object can be created
 try:
     champions = Champions("en-US")
+    print(f"Champions() object created. ✅\n{line}")
 except Exception as e:
     print(f"Error creating Champions() object: {e}⛔\n{line}")
 

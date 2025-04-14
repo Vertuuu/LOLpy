@@ -39,6 +39,8 @@ class Champion:
         """
         champion_lanes = list(self.champion_obj["positions"])
         return  champion_lanes
+    
+    
             
 
 class ChampionImages(Champion):

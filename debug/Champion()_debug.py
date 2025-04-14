@@ -10,9 +10,9 @@ line = "-" * 50
 
 print(f"\n{line_header}\nChampion() class debug\n{line_header}\n")
 #test if the Champion() object can be created
-
 try:
     champion = Champion(DEBUG_CHAMPION_NAME, "en-US")
+    print(f"Champion() object created. ✅\n{line}")
 except Exception as e:
     print(f"Error creating Champion() object: {e}⛔\n{line}")
 
