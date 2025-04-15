@@ -1,0 +1,5 @@
+setup.py
+LOLpy.egg-info/PKG-INFO
+LOLpy.egg-info/SOURCES.txt
+LOLpy.egg-info/dependency_links.txt
+LOLpy.egg-info/top_level.txt
