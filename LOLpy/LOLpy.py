@@ -49,11 +49,10 @@ class ChampionImages(Champion):
         Initializes the ChampionImages object with the champion's name and region.
         """
         super().__init__(name, region)
-        self.champion_dir = f"images/champion_imgs/{self.name}_imgs"
-        os.system(f"mkdir images && cd images && mkdir champion_imgs")
-        sleep(0.5)
-        os.system(f"cd images/champion_imgs && mkdir {self.name}_imgs  && cd {self.name}_imgs && mkdir skins && cd ../../..")
-        sleep(0.5)
+        cwd = os.getcwd()
+        self.champion_dir = f"{cwd}\\LOLpy_django\\mystaticfiles\\images\\champion_imgs\\{self.name}_imgs"
+        os.system(f"cd {cwd}\\LOLpy_django\\mystaticfiles && mkdir images && cd images && mkdir champion_imgs && cd champion_imgs && mkdir {self.name}_imgs && cd {self.name}_imgs && mkdir skins && cd skins")
+
     def get_all_champion_images(self):
         """
         Retrieves all images of the champion and saves them to a directory with the champion's name inside images/champion_imgs.
@@ -67,7 +66,7 @@ class ChampionImages(Champion):
         champion_icon = requests.get(f"{champion_icon}")
         if champion_icon.status_code == 200:
             try:
-                with open(f'{self.champion_dir}/icon-{self.name}.jpg', 'wb') as file:
+                with open(f'{self.champion_dir}\\icon-{self.name}.jpg', 'wb') as file:
                     file.write(champion_icon.content)
             except Exception as e:
                 print(f"Error saving icon: {e}")
@@ -75,7 +74,7 @@ class ChampionImages(Champion):
         champion_loading = self.champion_obj["skins"][0]["loadScreenPath"]
         champion_loading = requests.get(f"{champion_loading}")
         if champion_loading.status_code == 200:
-            with open(f'{self.champion_dir}/loading-{self.name}.jpg', 'wb') as file:
+            with open(f'{self.champion_dir}\\loading-{self.name}.jpg', 'wb') as file:
                 file.write(champion_loading.content)
 
     def get_splash_art(self):
@@ -83,7 +82,7 @@ class ChampionImages(Champion):
         champion_splash = requests.get(f"{champion_splash}")
         if champion_splash.status_code == 200:
             try:
-                with open(f'{self.champion_dir}/splash-{self.name}.jpg', 'wb') as file:
+                with open(f'{self.champion_dir}\\splash-{self.name}.jpg', 'wb') as file:
                     file.write(champion_splash.content)
             except Exception as e:
                 print(f"Error saving splash art: {e}")
@@ -97,7 +96,7 @@ class ChampionImages(Champion):
                 skin_splash = skin["uncenteredSplashPath"]
                 skin_splash = requests.get(f"{skin_splash}")
                 if skin_splash.status_code == 200 and skin != champion_skins[0]:
-                    with open(f'{self.champion_dir}/skins/{self.name}-{skin_name}.jpg', 'wb') as file:
+                    with open(f'{self.champion_dir}\\skins\\{self.name}-{skin_name}.jpg', 'wb') as file:
                         file.write(skin_splash.content)
             except Exception as e:
                 print(f"Error saving skin splash art: {e}")
