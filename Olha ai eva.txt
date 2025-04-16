@@ -1,0 +1,60 @@
+﻿Olha ai Eva.
+* ID do Campeão  1.0:
+   * Tipo de Dado: Inteiro único para cada campeão.
+---------------------------------------------------------------------------------------------------------------------
+* Chave do Campeão)2.0:
+   * Tipo de Dado: única para cada campeão.
+---------------------------------------------------------------------------------------------------------------------
+* Nome do Campeão 3.0:
+   * Tipo de Dado: texto
+---------------------------------------------------------------------------------------------------------------------
+* Título do Campeão 4.0 :
+   * Tipo de Dado: texto
+   * Importância: Uma breve descrição ou título associado ao campeão (ex: "O Mestre das Sombras" para Zed).
+---------------------------------------------------------------------------------------------------------------------
+* Nome Canônico do Campeão 5.0:
+   * Tipo de Dado: texto
+---------------------------------------------------------------------------------------------------------------------
+* Biografia do Campeão 6.0:
+   * Tipo de Dado: Texto longo.
+---------------------------------------------------------------------------------------------------------------------
+* Tags do Campeão 7.0:
+   * Tipo de Dado: array de strings (ex: ['Mage', 'Assassin']$).
+---------------------------------------------------------------------------------------------------------------------
+* Nível de Dificuldade 8.0:
+   * Tipo de Dado: Int (geralmente de 1 a 10).
+---------------------------------------------------------------------------------------------------------------------
+* Recursos do Campeão 9.0:
+   * Tipo de Dado: String (ex: "Mana", "Energia", "Fúria", "Vida", "Nenhum").
+---------------------------------------------------------------------------------------------------------------------
+* Habilidades do Campeão 10.0):
+   * Tipo de Dado: Lista ou array de objetos, onde cada objeto representa uma habilidade (Passiva, Q, W, E, R) e contém informações como:
+      * id: ID único da habilidade.
+      * nome: Nome da habilidade .
+      * descrição: Descrição da habilidade.
+      * Tooltip: Descrição detalhada da habilidade com placeholders para valores .
+      * Max rank: Nível máximo da habilidade .
+      * cooldown: Lista de valores de tempo de recarga em diferentes ranks.
+      * cost: Lista de valores de custo em diferentes ranks.
+      * cost Type: Tipo de custo (ex: "Mana", "Energia").
+      * effect: Lista de listas de valores de efeito em diferentes ranks.
+      * Effect Burn: Lista de strings descritivas dos efeitos. 
+      * vars: Lista de objetos contendo informações sobre variáveis de efeito.
+---------------------------------------------------------------------------------------------------------------------
+* Passiva do Campeão  11.0:
+   * Tipo de Dado: Objeto contendo:
+      * nome: Nome da passiva.
+      * descrição: Descrição da passiva .
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+* Skins do Campeão 12.0:
+   * Tipo de Dado: Lista ou array de objetos, onde cada objeto representa uma skin e contém:
+      * id: ID único da skin.
+      * nome: Nome da skin.
+      * num: Numero da skin para o campeão.
+      * chromas: Indica se a skin possui cromas.
