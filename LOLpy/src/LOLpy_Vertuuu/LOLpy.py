@@ -40,28 +40,65 @@ class Champion:
         return  champion_lanes
     
 class ChampionImages(Champion):
-    def __init__(self, name: str, imgs_dir: str, region="en-US"):
+    def __init__(self, name: str, imgs_dir="", region="en-US"):
         """
         Initializes the ChampionImages object with the champion's name and region.
         """
         super().__init__(name, region)
-        self.imgs_dir = imgs_dir
+        self.imgs_dir = os.getcwd() if imgs_dir == "" else str(imgs_dir)
         self.champion_dir = f"{self.imgs_dir}\\images\\champion_imgs\\{self.name}_imgs"
+
+    def create_imgs_dir(self):
         os.system(f"cd {self.imgs_dir} && mkdir images")
         os.system(f"cd {self.imgs_dir}\\images && mkdir champion_imgs")
-        os.system(f"cd {self.imgs_dir}\\images\\champion_imgs && mkdir {self.name}_imgs") 
+        os.system(f"cd {self.imgs_dir}\\images\\champion_imgs && mkdir {self.name}_imgs")
         os.system(f"cd {self.champion_dir} && mkdir skins")
-
-    def get_all_champion_images(self):
+    def get_all_champion_images_sources(self):
+        """
+        Returns the source URLs for all champion's default images
+        (icon, loading screen image and splash art, in order)
+        """
+        icon, loading, splash = self.get_icon_source(), self.get_loading_screen_source(), self.get_splash_art_source
+        return [icon, loading, splash]
+    def get_icon_source(self):
+        """
+        Returns the source URL for a champion's icon
+        """
+        champion_icon = self.champion_obj["icon"]
+        return champion_icon
+    
+    def get_splash_art_source(self):
+        """
+        Returns the source URL for a champion's splash art
+        """
+        champion_splash = self.champion_obj["skins"][0]["uncenteredSplashPath"]
+        return champion_splash
+    
+    def get_loading_screen_source(self):
+        """
+        Returns the source URL for a champion's loading screen image
+        """
+        champion_loading = self.champion_obj["skins"][0]["loadScreenPath"]
+        return champion_loading
+    
+    def get_champion_skins_sources(self):
+        champion_skins = self.champion_obj["skins"]
+        champion_skins = champion_skins[1:]
+        return champion_skins
+    
+    def download_all_champion_images(self):
         """
         Retrieves all images of the champion and saves them to a directory with the champion's name inside images/champion_imgs.
         """
-        self.get_icon()
-        self.get_loading_screen_img()
-        self.get_splash_art()
+        self.create_imgs_dir()
+        self.download_icon()
+        self.download_loading_screen_img()
+        self.download_splash_art()
 
-    def get_icon(self):
-        champion_icon = self.champion_obj["icon"]
+    def download_icon(self):
+        if not os.path.isdir(self.champion_dir):
+            self.create_imgs_dir()
+        champion_icon = self.get_icon_source()
         champion_icon = requests.get(f"{champion_icon}")
         if champion_icon.status_code == 200:
             try:
@@ -69,15 +106,20 @@ class ChampionImages(Champion):
                     file.write(champion_icon.content)
             except Exception as e:
                 print(f"Error saving icon: {e}")
-    def get_loading_screen_img(self):
-        champion_loading = self.champion_obj["skins"][0]["loadScreenPath"]
+
+    def download_loading_screen_img(self):
+        if not os.path.isdir(self.champion_dir):
+            self.create_imgs_dir()
+        champion_loading = self.get_loading_screen_source()
         champion_loading = requests.get(f"{champion_loading}")
         if champion_loading.status_code == 200:
             with open(f'{self.champion_dir}\\loading-{self.name}.jpg', 'wb') as file:
                 file.write(champion_loading.content)
 
-    def get_splash_art(self):
-        champion_splash = self.champion_obj["skins"][0]["uncenteredSplashPath"]
+    def download_splash_art(self):
+        if not os.path.isdir(self.champion_dir):
+            self.create_imgs_dir()
+        champion_splash = self.get_splash_art_source()
         champion_splash = requests.get(f"{champion_splash}")
         if champion_splash.status_code == 200:
             try:
@@ -85,16 +127,18 @@ class ChampionImages(Champion):
                     file.write(champion_splash.content)
             except Exception as e:
                 print(f"Error saving splash art: {e}")
-    def get_champion_skins(self):
-        champion_skins = self.champion_obj["skins"]
+
+    def download_champion_skins(self):
+        if not os.path.isdir(self.champion_dir):
+            self.create_imgs_dir()
+        champion_skins = self.get_champion_skins_sources()
         skins_names = list([skin["name"] for skin in champion_skins])
-        skins_names = skins_names[1:]
         for skin in champion_skins:
             try:
                 skin_name = skin["name"].replace(" ", "_").replace("/", "_").replace("'", "_").replace(":", "_").replace("!", "_").replace(".", "_").replace(",", "_")
                 skin_splash = skin["uncenteredSplashPath"]
                 skin_splash = requests.get(f"{skin_splash}")
-                if skin_splash.status_code == 200 and skin != champion_skins[0]:
+                if skin_splash.status_code == 200:
                     with open(f'{self.champion_dir}\\skins\\{self.name}-{skin_name}.jpg', 'wb') as file:
                         file.write(skin_splash.content)
             except Exception as e:
@@ -119,18 +163,21 @@ class Champions:
         """
         champions_names = [champion["name"] for champion in self.champions_data]
         return champions_names
+    
     def get_champions_ids(self):
         """
         Returns a list of all champions IDs.
         """
         champions_ids = [champion["id"] for champion in self.champions_data]
         return champions_ids
+    
     def get_champions_keys(self):
         """
         Returns a list of all champions keys.
         """
         champions_keys = [champion["key"] for champion in self.champions_data]
         return champions_keys
+
     def get_champions_by_lane(self, lane: str):
         """
         Returns a list of champions in given lane.
