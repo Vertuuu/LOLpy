@@ -1,7 +1,6 @@
 LICENSE
 README.md
 pyproject.toml
-setup.py
 LOLpy_Vertuuu.egg-info/PKG-INFO
 LOLpy_Vertuuu.egg-info/SOURCES.txt
 LOLpy_Vertuuu.egg-info/dependency_links.txt

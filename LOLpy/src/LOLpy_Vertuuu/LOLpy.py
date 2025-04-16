@@ -47,7 +47,10 @@ class ChampionImages(Champion):
         super().__init__(name, region)
         self.imgs_dir = imgs_dir
         self.champion_dir = f"{self.imgs_dir}\\images\\champion_imgs\\{self.name}_imgs"
-        os.system(f"cd {self.imgs_dir} && mkdir images && cd images && mkdir champion_imgs && cd champion_imgs && mkdir {self.name}_imgs && cd {self.name}_imgs && mkdir skins && cd skins")
+        os.system(f"cd {self.imgs_dir} && mkdir images")
+        os.system(f"cd {self.imgs_dir}\\images && mkdir champion_imgs")
+        os.system(f"cd {self.imgs_dir}\\images\\champion_imgs && mkdir {self.name}_imgs") 
+        os.system(f"cd {self.champion_dir} && mkdir skins")
 
     def get_all_champion_images(self):
         """
