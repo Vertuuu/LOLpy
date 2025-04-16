@@ -1,0 +1,22 @@
+[project]
+name = "LOLpy_Vertuuu"
+version = "0.0.3"
+authors = [
+  { name="Vertuuu", email="everton250406@gmail.com" },
+]
+description = "A simple LOL package"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.0.0"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/Vertuuu/LOLpy"
+Issues = "https://github.com/Vertuuu/LOLpy/issues"
