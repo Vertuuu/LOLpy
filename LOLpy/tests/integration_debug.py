@@ -44,9 +44,9 @@ for champion in champions_keys:
         print(f"{key}'s data retrieved successfully. ✅\n{line}")
 
         if DEBUG_IMAGES_ON:
-            champion_img_obj = ChampionImages(champion, "en-US")
-            champion_img_obj.get_all_champion_images()
-            champion_img_obj.get_champion_skins()
+            champion_img_obj = ChampionImages(champion, region="en-US")
+            champion_img_obj.download_all_champion_images()
+            champion_img_obj.download_champion_skins()
             print(f"{key}'s images retrieved successfully. ✅\n{line}")
 
     except Exception as e:
