@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-debug_dir = os.path.join("src/LOLpy_Vertuuu")
+debug_dir = os.path.join("LOLpy/src/LOLpy_Vertuuu")
 debug_files = os.listdir(debug_dir)
 confirm = True         #change this boolean if you want it to ask you before running next debug file in each execution
 

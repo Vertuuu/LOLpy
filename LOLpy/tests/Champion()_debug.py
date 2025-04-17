@@ -22,6 +22,16 @@ try:
 except Exception as e:  
     print(f"Error getting champion key: {e}⛔\n{line}")
 
+#test if .get_champion_name() method works 
+print(f"\nTesting get_champion_name() method:")
+try:
+    name = champion.get_champion_name()
+    assert type(name) == str, "Champion name is not a string"
+    assert len(name)>0, "Champion name is an empty string"
+    print(f"Champion Name: {name}✅\n{line}")
+except Exception as e:  
+    print(f"Error getting champion name: {e}⛔\n{line}")
+
 #test if .get_champion_title() method works
 print(f"\nTesting get_champion_title() method:")
 try:
