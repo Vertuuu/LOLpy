@@ -1,4 +1,1 @@
-
-This is a simple example package. You can use
-[GitHub-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-to write your content.
+create venv -> activate venv -> pip install -r requirements.txt -> do the updates in the package that i want -> change pyproject.toml version number -> py -m build -> py -m twine upload --repository testpypi dist/*
