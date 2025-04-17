@@ -36,6 +36,12 @@ class Champion:
         """
         champion_id = self.champion_obj["id"]
         return champion_id
+    def get_champion_lore(self):
+        """
+        Returns champion's lore, which is, actually, a summarized version of it's lore
+        """
+        champion_bio = self.champion_obj["lore"]
+        return champion_bio
     def get_champion_lanes(self):
         """
         Returns champion's lanes
