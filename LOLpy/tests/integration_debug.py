@@ -35,12 +35,13 @@ for champion in champions_keys:
         title = champion_obj.get_champion_title()
         id = champion_obj.get_champion_id()
         lanes = champion_obj.get_champion_lanes()
-        
+        resource = champion_obj.get_champion_resource()
         print(f"Champion's Info:\n")
         print(f"Key: {key}")
         print(f"Title: {title}")
         print(f"ID: {id}")
         print(f"Lanes: {lanes}")
+        print(f"Resource: {resource}")
         print(f"{key}'s data retrieved successfully. ✅\n{line}")
 
         if DEBUG_IMAGES_ON:

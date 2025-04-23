@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: LOLpy_Vertuuu
-Version: 0.0.7
+Version: 0.0.9
 Summary: A simple LOL package
 Author-email: Vertuuu <everton250406@gmail.com>
 License-Expression: MIT
@@ -14,7 +14,4 @@ License-File: LICENSE
 Requires-Dist: requests>=2.0.0
 Dynamic: license-file
 
-
-This is a simple example package. You can use
-[GitHub-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-to write your content.
+create venv -> activate venv -> pip install -r requirements.txt -> do the updates in the package that i want -> change pyproject.toml version number -> py -m build -> py -m twine upload --repository testpypi dist/*

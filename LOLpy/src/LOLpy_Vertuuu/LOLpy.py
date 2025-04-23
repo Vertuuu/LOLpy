@@ -48,7 +48,76 @@ class Champion:
         """
         champion_lanes = list(self.champion_obj["positions"])
         return  champion_lanes
+    def get_champion_resource(self):
+        """
+        Return champion's resource to cast abilities
+        """
+        champion_resource = self.champion_obj["resource"]
+        return champion_resource
     
+    def get_champion_range(self):
+        """
+        Return champion's attack range type
+        """
+        champion_range = self.champion_obj["attackType"]
+        return champion_range
+    
+    def get_abilities_names(self):
+        """
+        Returns a dict with champion's passive and abilities names
+        """
+        champion_abilities = self.champion_obj["abilities"]
+        p = champion_abilities["P"][0]["name"]
+        q = champion_abilities["Q"][0]["name"]
+        w = champion_abilities["W"][0]["name"]
+        e = champion_abilities["E"][0]["name"]
+        r = champion_abilities["R"][0]["name"]
+        champion_abilities = {
+            "P": p,
+            "Q": q,
+            "W": w,
+            "E": e,
+            "R": r
+        }
+        return champion_abilities
+    def get_abilities_sources(self):
+        """
+        Returns a dict with champion's passive and abilities image sources
+        """
+        champion_abilities = self.champion_obj["abilities"]
+        p = champion_abilities["P"][0]["icon"]
+        q = champion_abilities["Q"][0]["icon"]
+        w = champion_abilities["W"][0]["icon"]
+        e = champion_abilities["E"][0]["icon"]
+        r = champion_abilities["R"][0]["icon"]
+        champion_abilities = {
+            "P": p,
+            "Q": q,
+            "W": w,
+            "E": e,
+            "R": r
+        }
+        return champion_abilities
+    def get_release_date(self):
+        """
+        Returns the date that the champion was released
+        """
+        champion_release = self.champion_obj["releaseDate"]
+        return champion_release
+    def get_price(self):
+        """
+        Returns a dict with champion's price in blue essences and RP
+        """
+        champion_price = self.champion_obj["price"]
+        blue = champion_price["blueEssence"]
+        rp = champion_price["rp"]
+
+        champion_price = {
+            "blueEssence": blue,
+            "rp": rp
+        }
+        return champion_price
+
 class ChampionImages(Champion):
     def __init__(self, key: str, imgs_dir="", region="en-US"):
         """
