@@ -98,6 +98,25 @@ class Champion:
             "R": r
         }
         return champion_abilities
+    def get_abilities_description(self):
+        """
+        Returns a dict with champion's passive and abilities descriptions
+        """
+        champion_abilities = self.champion_obj["abilities"]
+        p = champion_abilities["P"][0]["effects"][0]["description"]
+        q = champion_abilities["Q"][0]["effects"][0]["description"]
+        w = champion_abilities["W"][0]["effects"][0]["description"]
+        e = champion_abilities["E"][0]["effects"][0]["description"]
+        r = champion_abilities["R"][0]["effects"][0]["description"]
+        champion_abilities = {
+            "P": p,
+            "Q": q,
+            "W": w,
+            "E": e,
+            "R": r
+        }
+        return champion_abilities
+
     def get_release_date(self):
         """
         Returns the date that the champion was released
@@ -125,6 +144,8 @@ class ChampionImages(Champion):
         """
         super().__init__(key, region)
         self.imgs_dir = os.getcwd() if imgs_dir == "" else str(imgs_dir)
+        if not os.path.isdir(self.imgs_dir):
+            raise ValueError(f"Directory '{self.imgs_dir}' does not exist.")
         self.champion_dir = f"{self.imgs_dir}\\images\\champion_imgs\\{self.key}_imgs"
 
     def create_imgs_dir(self):
@@ -137,7 +158,7 @@ class ChampionImages(Champion):
         Returns the source URLs for all champion's default images
         (icon, loading screen image and splash art, in order)
         """
-        icon, loading, splash = self.get_icon_source(), self.get_loading_screen_source(), self.get_splash_art_source
+        icon, loading, splash = self.get_icon_source(), self.get_loading_screen_source(), self.get_splash_art_source()
         return [icon, loading, splash]
     def get_icon_source(self):
         """

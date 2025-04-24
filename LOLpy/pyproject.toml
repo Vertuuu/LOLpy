@@ -1,6 +1,6 @@
 [project]
 name = "LOLpy_Vertuuu"
-version = "0.0.9"
+version = "0.0.10"
 authors = [
   { name="Vertuuu", email="everton250406@gmail.com" },
 ]
